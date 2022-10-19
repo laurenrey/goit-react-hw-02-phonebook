@@ -17,3 +17,7 @@ export const ContactsTitle = styled.h2`
   font-size: 24px;
   margin-bottom: 28px;
 `;
+
+export const Message = styled.p`
+  font-size: 18px;
+`;

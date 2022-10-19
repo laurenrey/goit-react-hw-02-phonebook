@@ -4,7 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
-import { Wrapper, MainTitle, ContactsTitle } from './App.styled';
+import { Wrapper, MainTitle, ContactsTitle, Message } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -62,7 +62,7 @@ export class App extends Component {
 
   render() {
     const visibleContacts = this.getVisibleContacts();
-    const { filter } = this.state;
+    const { filter, contacts } = this.state;
     return (
       <Wrapper>
         <MainTitle>Phonebook</MainTitle>
@@ -70,12 +70,17 @@ export class App extends Component {
         <Toaster position="top-center" reverseOrder={false} />
 
         <ContactsTitle>Contacts</ContactsTitle>
-
-        <Filter value={filter} onChange={this.changeFilter} />
-        <ContactList
-          contacts={visibleContacts}
-          deleteContact={this.deleteContact}
-        />
+        {contacts.length !== 0 ? (
+          <>
+            <Filter value={filter} onChange={this.changeFilter} />
+            <ContactList
+              contacts={visibleContacts}
+              deleteContact={this.deleteContact}
+            />
+          </>
+        ) : (
+          <Message>The phonebook is empty!</Message>
+        )}
       </Wrapper>
     );
   }
